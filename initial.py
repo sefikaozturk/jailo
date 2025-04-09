@@ -8,7 +8,7 @@ country_choice = st.selectbox("Choose Country:", options=["USA", "UK", "Germany"
 
 if st.button("Analyze Tweet"): 
     with st.spinner("Analyzing tweet with CrewAI..."): # Replace with your actual CrewAI API URL. 
-        APIURL = "https://yourcrewaidomain.com/analyzeTweet" # Send a POST request to your CrewAI API. 
+        APIURL = "https://crew-automation-agent-creation-c0fe66b5-733-15e36796.crewai.com" # Send a POST request to your CrewAI API. 
         response = requests.post(APIURL, json={"tweettext": tweettext, "countrychoice": countrychoice}) 
         crewAI_response = response.json()
         st.subheader("Risk Percentage")
