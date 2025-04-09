@@ -1,7 +1,7 @@
 import streamlit as st 
 import requests
 
-st.title("Legal Risk Analyzer for Tweets") 
+st.title("Will You Get in Jail For This Tweet") 
 st.markdown("Enter your tweet and select a country to get a legal risk score.")
 
 tweet_text = st.text_area("Enter tweet text:") 
