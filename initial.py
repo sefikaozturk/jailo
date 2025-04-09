@@ -4,7 +4,7 @@ import requests
 st.title("CrewAI Tweet Legal Risk Analyzer") 
 st.markdown("Enter your tweet and select a country to get a legal risk score based on CrewAI's automation.")
 
-tweettext = st.textarea("Enter tweet text:") 
+tweettext = st.text_area("Enter tweet text:") 
 country_choice = st.selectbox("Choose Country:", options=["USA", "UK", "Germany"]) # extend as needed
 
 if st.button("Analyze Tweet"): 
