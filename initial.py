@@ -1,22 +1,19 @@
-import streamlit as st
+import streamlit as st import requests
 
-# Set page title and description
 st.title("CrewAI Tweet Legal Risk Analyzer") 
 st.markdown("Enter your tweet and select a country to get a legal risk score based on CrewAI's automation.")
 
-# Inputs: Tweet text and country selection
 tweettext = st.textarea("Enter tweet text:") 
-country_choice = st.selectbox("Choose Country:", options=["USA", "UK", "Germany"])
+country_choice = st.selectbox("Choose Country:", options=["USA", "UK", "Germany"]) # extend as needed
 
-# When the Analyze button is pressed
-if st.button("Analyze Tweet"): # Simulate the CrewAI analysis process 
-    # In production, this would call your CrewAI automation code 
-    crewAIresponse = { "riskPercentage": 65, "detailedReport": { "categories": { "hateSpeech": { "risk": 70, "info": "The tweet contains aggressive language that might conflict with hate speech guidelines (Source: TrustedLegalSource1)." }, "incitement": { "risk": 60, "info": "Some phrases potentially encourage negative actions, consistent with incitement criteria (Source: TrustedLegalSource2)." }, "defamation": { "risk": 55, "info": "The content could be viewed as defaming, based on legal texts for the chosen country (Source: TrustedLegalSource3)." } }, "overallNotes": f"The analysis is based on matching tweet content with current legal guidelines for {countrychoice} as updated for 2025." } }
-# Display the overall risk percentage
-st.subheader("Risk Percentage")
-st.write(f"{crewAI_response['riskPercentage']}%")
+if st.button("Analyze Tweet"): 
+    with st.spinner("Analyzing tweet with CrewAI..."): # Replace with your actual CrewAI API URL. 
+        APIURL = "https://yourcrewaidomain.com/analyzeTweet" # Send a POST request to your CrewAI API. 
+        response = requests.post(APIURL, json={"tweettext": tweettext, "countrychoice": countrychoice}) 
+        crewAI_response = response.json()
+        st.subheader("Risk Percentage")
+        st.write(f"{crewAI_response['riskPercentage']}%")
 
-# Provide an expandable detailed report
 with st.expander("Show Detailed Report"):
     for category, details in crewAI_response["detailedReport"]["categories"].items():
         st.markdown(f"### {category}")
