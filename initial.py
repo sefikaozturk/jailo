@@ -1,46 +1,26 @@
 import streamlit as st
-from crewai import Crew # Adjust this if your import is different
 
-# Step 1: Initialize the Crew (only once)
-@st.cache_resource
-def load_crew():
-    # Replace this with your actual Crew setup
-    crew = Crew(
-        agents=[...],  # your agents here
-        tasks=[...],   # your tasks here
-        verbose=True
-    )
-    return crew
+# Set page title and description
+st.title("CrewAI Tweet Legal Risk Analyzer") 
+st.markdown("Enter your tweet and select a country to get a legal risk score based on CrewAI's automation.")
 
-# Step 2: Run CrewAI agent based on user input
-def run_crew_agent(user_input: str) -> str:
-    crew = load_crew()
-    response = crew.run(user_input)
-    
-    # Optional: handle response if it's structured
-    if isinstance(response, dict):
-        output = ""
-        for key, value in response.items():
-            output += f"**{key.capitalize()}**\n{value}\n\n"
-        return output
-    return response
+# Inputs: Tweet text and country selection
+tweettext = st.textarea("Enter tweet text:") 
+country_choice = st.selectbox("Choose Country:", options=["USA", "UK", "Germany"])
 
-# Step 3: Streamlit UI
-st.set_page_config(page_title="How Far Does $100 Go?", layout="centered")
-st.title("How Far Does $100 Go?")
-st.markdown("Explore purchasing power across the world and learn cultural insights from AI agents.")
+# When the Analyze button is pressed
+if st.button("Analyze Tweet"): # Simulate the CrewAI analysis process 
+    # In production, this would call your CrewAI automation code 
+    crewAIresponse = { "riskPercentage": 65, "detailedReport": { "categories": { "hateSpeech": { "risk": 70, "info": "The tweet contains aggressive language that might conflict with hate speech guidelines (Source: TrustedLegalSource1)." }, "incitement": { "risk": 60, "info": "Some phrases potentially encourage negative actions, consistent with incitement criteria (Source: TrustedLegalSource2)." }, "defamation": { "risk": 55, "info": "The content could be viewed as defaming, based on legal texts for the chosen country (Source: TrustedLegalSource3)." } }, "overallNotes": f"The analysis is based on matching tweet content with current legal guidelines for {countrychoice} as updated for 2025." } }
+# Display the overall risk percentage
+st.subheader("Risk Percentage")
+st.write(f"{crewAI_response['riskPercentage']}%")
 
-# User input section
-amount = st.slider("Amount of Money ($)", min_value=10, max_value=1000, step=10, value=100)
-city = st.text_input("Enter a city or country", value="Manila")
-category = st.selectbox("Choose a category", ["All", "Food", "Rent", "Transport", "Entertainment", "Utilities"])
-question = st.text_area("Ask the AI a specific question (optional)", placeholder="e.g., Why is food cheaper in Manila than in NYC?")
-
-# Combine input into prompt
-if st.button("Run Agent"):
-    with st.spinner("Analyzing..."):
-        input_text = f"You have ${amount} in {city}. Category: {category}. {question}"
-        result = run_crew_agent(input_text)
-    st.success("Done!")
-    st.markdown("### Agent Response")
-    st.markdown(result)
+# Provide an expandable detailed report
+with st.expander("Show Detailed Report"):
+    for category, details in crewAI_response["detailedReport"]["categories"].items():
+        st.markdown(f"### {category}")
+        st.write(f"Risk: {details['risk']}%")
+        st.write(details["info"])
+    st.markdown("### Overall Notes")
+    st.write(crewAI_response["detailedReport"]["overallNotes"])
