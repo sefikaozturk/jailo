@@ -1,4 +1,5 @@
-import streamlit as st import requests
+import streamlit as st 
+import requests
 
 st.title("CrewAI Tweet Legal Risk Analyzer") 
 st.markdown("Enter your tweet and select a country to get a legal risk score based on CrewAI's automation.")
