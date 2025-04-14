@@ -5,7 +5,16 @@ st.title("Will You Go to Jail For This Tweet")
 st.markdown("Enter your tweet and select a country to get a legal risk score.")
 
 tweet_text = st.text_area("Enter tweet text:") 
-country_choice = st.selectbox("Choose Country:", options=["USA", "UK", "Germany"])
+country_choice = st.selectbox("Choose Country:", options=["USA", "UK", "China", "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", 
+                                                          "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", 
+                                                          "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", 
+                                                          "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", 
+                                                          "Chad", "Chile", "China", "Colombia", "Comoros", "Congo (Congo-Brazzaville)", "Costa Rica", "Croatia", "Cuba", "Cyprus", 
+                                                          "Czech Republic (Czechia)", "Democratic Republic of the Congo", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", 
+                                                          "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini (fmr. "Swaziland")", "Ethiopia", "Fiji", "Finland", "France", 
+                                                          "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", 
+                                                          "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan"
+])
 
 if st.button("Analyze Tweet"): 
     with st.spinner("Analyzing tweet with CrewAI..."): 
