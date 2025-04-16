@@ -1,3 +1,7 @@
 ## Jailo
 
-### Will you go to jail for this tweet?
+Tech stack:
+
+- Python
+- CrewAI Agents
+- GPT-4o
